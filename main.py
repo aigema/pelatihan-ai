@@ -14,33 +14,33 @@ load_dotenv()
 def main():
 
     st.set_page_config(
-        page_title="BIOTROP AI",
-        page_icon="🌾",
+        page_title="AI PELATIHAN",
+        page_icon="👨🏼‍🏫",
         layout="wide",
         initial_sidebar_state="expanded",
     )
-    def get_base64_of_bin_file(bin_file):
-    
-        with open(bin_file, 'rb') as file:
-            binary_data = file.read()
-            base64_data = base64.b64encode(binary_data).decode('utf-8')
-        return base64_data
-
-    image_path = "./Logo/Logo_GEMA.png"
-    image_base64 = get_base64_of_bin_file(image_path)
-
-    st.markdown(f"""
-        <style>
-        .Logo {{
-            width: 30vw;
-        }}
-        </style>
-        <img src="data:image/png;base64,{image_base64}" class="Logo">
-        """, unsafe_allow_html=True)
+ 
 
 
-    question = st.text_area("Hello Can I help you?:", "Write your question here")
-    st.write(f"**Your Question:** {question}")
+
+
+    # Judul aplikasi
+    st.title('AI Pelatihan')
+
+    # Deskripsi menggunakan HTML dan pemisahan baris
+    st.write(
+        'Gema Foundation mempersembahkan AI hasil pelatihan canggih yang dirancang untuk menghadirkan solusi inovatif dan efisien.<br>'
+        'Dengan fokus pada teknologi dan keberlanjutan, AI ini siap menjadi mitra strategis dalam menghadapi tantangan dan menciptakan masa depan yang lebih baik.',
+        unsafe_allow_html=True
+    )
+
+    # Input pertanyaan dari pengguna dengan placeholder
+    question = st.text_area("Masukkan Pertanyaan Anda:", placeholder="Tulis pertanyaan di sini...")
+
+    # Menampilkan kembali pertanyaan pengguna
+    if question:
+        st.write(f"**Pertanyaan Anda:** {question}")
+
 
 
     openaigpt4 = ChatOpenAI(
@@ -69,9 +69,6 @@ def main():
         """)
 
         results_str = str(results)
-        # runner = file_writer_tool._run(filename='example.txt', content=results_str, directory='./note', overwrite=True)
-        # print(runner)
-
         st.success("Results saved successfully!")
 
 if __name__ == "__main__":
